@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Electrical Transformers Product Catalog - SKA Transformers</title>
+  <meta name="description" content="Browse SKA Transformers' product catalog. Find power, pad-mounted, station, VPI, and dry type transformers.">
+
+  <!-- Bootstrap & CDN Libraries -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-xl fixed-top main-navbar">
+  <div class="container-fluid px-lg-5">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="skaLogo.webp" class="navbar-logo" alt="SKA Logo">
+      <span class="brand-name">Transformers</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Products
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="productsDropdown">
+            <li><a class="dropdown-item" href="products.html">All Products</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="power-transformers.html">Power Transformers</a></li>
+            <li><a class="dropdown-item" href="Pad-mounted.html">Pad Mounted Transformers</a></li>
+            <li><a class="dropdown-item" href="Station-transformer.html">Station Transformers</a></li>
+            <li><a class="dropdown-item" href="vpi-transformer.html">VPI Transformers</a></li>
+            
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="industries.html">Industries</a></li>
+        <li class="nav-item"><a class="nav-link" href="Project.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="manufacturing.html">Manufacturing</a></li>
+        <li class="nav-item"><a class="nav-link" href="downloads.html">Downloads</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html#quote-form" class="btn quote-btn">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="page-title">Product Catalog</h1>
+        <p class="page-subtitle">Explore our five core high-efficiency industrial transformer systems</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Filter & Search Controls -->
+<section class="py-4 bg-light border-bottom">
+  <div class="container">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-5">
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+          <input type="text" class="form-control border-start-0 catalog-search-input" id="catalogSearch" placeholder="Search by name, voltage, rating, or application...">
+        </div>
+      </div>
+      <div class="col-lg-4 text-lg-center">
+        <div class="dropdown d-inline-block">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="categoryFilterLabel" data-bs-toggle="dropdown" aria-expanded="false">
+            Category: All
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="categoryFilterLabel" id="categoryMenu">
+            <li><a class="dropdown-item active" href="#" data-category="all">All Categories</a></li>
+            <li><a class="dropdown-item" href="#" data-category="liquid-filled">Liquid-Filled</a></li>
+            <li><a class="dropdown-item" href="#" data-category="dry-type">Dry-Type</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 text-lg-end">
+        <select class="form-select" id="catalogSort" style="border-radius: 30px;">
+          <option value="name-asc" selected>Sort by Name: A to Z</option>
+          <option value="name-desc">Sort by Name: Z to A</option>
+          <option value="rating-desc">Capacity: High to Low</option>
+          <option value="rating-asc">Capacity: Low to High</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products Grid -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4" id="productsGrid">
+      <!-- Product cards will be dynamically managed/filtered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="corporate-footer">
+  <div class="container-fluid px-lg-5">
+    <div class="row g-5 pb-5">
+      <!-- Brand & Bio -->
+      <div class="col-lg-4 col-md-6 pe-lg-5">
+        <div class="d-flex align-items-center mb-4">
+          <img src="skaLogo.webp" alt="SKA Logo" class="footer-logo">
+          <h5 class="text-white mb-0 ms-3 brand-name tracking-wide">SKA TRANSFORMERS</h5>
+        </div>
+        <p class="footer-bio">
+          From home to industrial applications, delivering efficient and reliable power solutions for 3.5 decades with UL listed transformers.
+        </p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      
+      <!-- Products -->
+      <div class="col-lg-2 col-md-6">
+        <h6 class="footer-heading">PRODUCTS</h6>
+        <ul class="footer-links">
+          <li><a href="power-transformers.html">Power Transformers</a></li>
+          <li><a href="Pad-mounted.html">Pad-Mounted</a></li>
+          <li><a href="Station-transformer.html">Station Transformers</a></li>
+          <li><a href="vpi-transformer.html">VPI Dry Type</a></li>
+          <li><a href="products.html">All Products <i class="bi bi-arrow-right ms-1"></i></a></li>
+        </ul>
+      </div>
+      
+      <!-- Company -->
+      <div class="col-lg-2 col-md-6">
+        <h6 class="footer-heading">COMPANY</h6>
+        <ul class="footer-links">
+          <li><a href="about.html">About SKA</a></li>
+          <li><a href="manufacturing.html">Manufacturing Facility</a></li>
+          <li><a href="industries.html">Industries Served</a></li>
+          <li><a href="Project.html">Featured Projects</a></li>
+          <li><a href="contact.html">Global Contact</a></li>
+        </ul>
+      </div>
+      
+      <!-- Newsletter -->
+      <div class="col-lg-4 col-md-6">
+        <h6 class="footer-heading">STAY UPDATED</h6>
+        <p class="footer-newsletter-text">Join thousands of engineers receiving our technical bulletins and grid infrastructure updates.</p>
+        <form class="footer-newsletter-form">
+          <div class="input-group">
+            <input type="email" class="form-control" placeholder="Enter your business email" aria-label="Email address" required>
+            <button class="btn btn-accent" type="submit">Subscribe</button>
+          </div>
+        </form>
+        <div class="mt-4">
+          <a href="https://wa.me/918766583894" class="footer-contact-badge">
+            <i class="bi bi-whatsapp"></i> Live Expert Chat
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Legal Bar -->
+    <div class="footer-bottom">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <p class="mb-0">&copy; 2026 SKA Transformers Pvt Ltd. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <span class="separator">&middot;</span>
+            <a href="#">Terms of Service</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+  });
+
+  // Approved 5 Products Database
+  const products = [
+    {
+      id: 1,
+      name: "Power Transformer",
+      category: "liquid-filled",
+      image: "powertransformer.jpg",
+      voltage: "Up to 132 kV",
+      powerRating: "10 MVA to 150 MVA",
+      capacityNumeric: 150000,
+      app: "Substations, Grid Transmission, Power Generation Plants",
+      desc: "High-voltage units designed for bulk power transfer. Built using advanced FEM modeling to ensure high short-circuit strength and cooling efficiency.",
+      link: "power-transformers.html"
+    },
+    {
+      id: 2,
+      name: "Pad Mounted Transformer",
+      category: "liquid-filled",
+      image: "img2.jpg",
+      voltage: "Up to 44 kV",
+      powerRating: "45 kVA to 10 MVA",
+      capacityNumeric: 10000,
+      app: "Underground residential distribution, Shopping complexes",
+      desc: "Compact, tamper-proof, outdoor oil-filled distribution transformer designed for underground grids without protective fencing.",
+      link: "Pad-mounted.html"
+    },
+    {
+      id: 3,
+      name: "Station Transformer",
+      category: "liquid-filled",
+      image: "img2.jpg",
+      voltage: "Up to 36 kV",
+      powerRating: "25 kVA to 10 MVA",
+      capacityNumeric: 10000,
+      app: "Substations, Control panel feeding, auxiliary support grids",
+      desc: "Station service transformers designed to provide reliable auxiliary control and protection power inside utility substations.",
+      link: "Station-transformer.html"
+    },
+    {
+      id: 4,
+      name: "VPI Transformer",
+      category: "dry-type",
+      image: "img13.jpeg",
+      voltage: "Up to 36 kV",
+      powerRating: "100 kVA to 15 MVA",
+      capacityNumeric: 15000,
+      app: "Industrial plants, Hospitals, High-Rise buildings, Mining",
+      desc: "Vacuum Pressure Impregnated transformers featuring Class H insulation, high mechanical strength, and minimal partial discharge levels.",
+      link: "vpi-transformer.html"
+    }
+  ];
+
+  // DOM Elements
+  const grid = document.getElementById("productsGrid");
+  const searchInput = document.getElementById("catalogSearch");
+  const sortSelect = document.getElementById("catalogSort");
+  const categoryMenu = document.getElementById("categoryMenu");
+  const categoryLabel = document.getElementById("categoryFilterLabel");
+
+  let activeCategory = "all";
+
+  // Render Function
+  function renderProducts(filterList) {
+    grid.innerHTML = "";
+    if (filterList.length === 0) {
+      grid.innerHTML = `<div class="col-12 text-center py-5"><i class="bi bi-emoji-frown fs-1 text-muted mb-3 d-block"></i><h4>No products match your criteria.</h4><p class="text-muted">Try clearing your filters or resetting the search term.</p></div>`;
+      return;
+    }
+
+    filterList.forEach((prod, index) => {
+      const card = document.createElement("div");
+      card.className = "col-lg-4 col-md-6 product-card-wrapper";
+      card.setAttribute("data-aos", "fade-up");
+      card.setAttribute("data-aos-delay", (100 * (index % 3)).toString());
+      
+      card.innerHTML = `
+        <div class="product-card-enhanced h-100 d-flex flex-column">
+          <div class="product-image-wrapper bg-dark text-white d-flex align-items-center justify-content-center" style="height: 220px; overflow: hidden; position: relative;">
+            <img src="${prod.image}" alt="${prod.name}" class="product-image w-100 h-100" style="object-fit: cover;">
+            <div class="product-badge bg-accent text-white" style="position: absolute; top: 15px; right: 15px; font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;">${prod.powerRating}</div>
+          </div>
+          <div class="product-content p-4 flex-grow-1 d-flex flex-column">
+            <span class="product-category text-accent fw-bold text-uppercase small mb-1">${prod.category.replace("-", " ")}</span>
+            <h4 class="fw-bold mb-2">${prod.name}</h4>
+            <p class="text-muted small flex-grow-1">${prod.desc}</p>
+            
+            <div class="spec-summary mb-3 p-3 bg-light rounded" style="font-size: 0.85rem;">
+              <div class="d-flex justify-content-between mb-1">
+                <span class="fw-bold text-dark">Voltage:</span>
+                <span class="text-muted">${prod.voltage}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-1">
+                <span class="fw-bold text-dark">Capacity:</span>
+                <span class="text-muted">${prod.powerRating}</span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span class="fw-bold text-dark">App:</span>
+                <span class="text-muted text-truncate" style="max-width: 150px;">${prod.app}</span>
+              </div>
+            </div>
+            
+            <a href="${prod.link}" class="btn btn-outline-primary w-100 mt-auto">Learn More <i class="bi bi-arrow-right ms-2"></i></a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    AOS.refresh();
+  }
+
+  // Filter & Search Logic
+  function handleFilterChange() {
+    const searchVal = searchInput.value.toLowerCase().trim();
+    const sortVal = sortSelect.value;
+
+    let filtered = products.filter(prod => {
+      const catMatches = activeCategory === "all" || prod.category === activeCategory;
+      const searchMatches = searchVal === "" || 
+        prod.name.toLowerCase().includes(searchVal) ||
+        prod.desc.toLowerCase().includes(searchVal) ||
+        prod.voltage.toLowerCase().includes(searchVal) ||
+        prod.powerRating.toLowerCase().includes(searchVal) ||
+        prod.app.toLowerCase().includes(searchVal);
+      return catMatches && searchMatches;
+    });
+
+    if (sortVal === "name-asc") {
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortVal === "name-desc") {
+      filtered.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (sortVal === "rating-desc") {
+      filtered.sort((a, b) => b.capacityNumeric - a.capacityNumeric);
+    } else if (sortVal === "rating-asc") {
+      filtered.sort((a, b) => a.capacityNumeric - b.capacityNumeric);
+    }
+
+    renderProducts(filtered);
+  }
+
+  searchInput.addEventListener("input", handleFilterChange);
+  sortSelect.addEventListener("change", handleFilterChange);
+
+  categoryMenu.addEventListener("click", (e) => {
+    e.preventDefault();
+    const target = e.target;
+    if (target.tagName === "A") {
+      categoryMenu.querySelectorAll(".dropdown-item").forEach(item => item.classList.remove("active"));
+      target.classList.add("active");
+      activeCategory = target.getAttribute("data-category");
+      categoryLabel.textContent = "Category: " + target.textContent;
+      handleFilterChange();
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderProducts(products);
+  });
+</script>
+
+</body>
+</html>

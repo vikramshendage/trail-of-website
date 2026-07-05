@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pad Mounted Transformer Catalogue - SKA Transformers</title>
+  <meta name="description" content="Safe, tamper-resistant pad-mounted liquid-filled transformers up to 5000 kVA, 34.5 kV Class engineered for underground distribution & solar renewable projects.">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --pdf-navy: #0b2545;
+      --pdf-blue: #134074;
+      --pdf-accent: #0077b6;
+      --pdf-gold: #f4a261;
+      --pdf-bg: #f8fafc;
+    }
+
+    body {
+      background-color: #475569;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      padding-top: 75px;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .pdf-viewer-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: #0f172a;
+      color: #ffffff;
+      z-index: 1050;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .pdf-viewer-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 450px;
+    }
+
+    .pdf-page-container {
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .pdf-page-sheet {
+      background: #ffffff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      border-radius: 4px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+      min-height: 1080px;
+      box-sizing: border-box;
+    }
+
+    .pdf-page-header-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 35px 15px 35px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .pdf-page-footer-strip {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 45px;
+      background: var(--pdf-navy);
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 35px;
+      font-size: 0.82rem;
+    }
+
+    .pdf-page-body {
+      padding: 35px;
+      padding-bottom: 65px;
+    }
+
+    .pdf-cover-sheet {
+      background: linear-gradient(135deg, #0b2545 0%, #134074 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 1080px;
+      position: relative;
+    }
+
+    .pdf-cover-vertical-title {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 4.5rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.15);
+      text-transform: uppercase;
+      position: absolute;
+      left: 25px;
+      bottom: 50px;
+      user-select: none;
+    }
+
+    .pdf-quote-banner {
+      background: #1e3a8a;
+      color: #ffffff;
+      padding: 20px 30px;
+      font-size: 1.35rem;
+      font-weight: 300;
+      font-style: italic;
+      border-left: 6px solid #38bdf8;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .pdf-section-title {
+      color: var(--pdf-navy);
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .pdf-section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--pdf-accent);
+      margin-top: 6px;
+    }
+
+    .pdf-blue-card {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+    }
+
+    /* Mobile & Tablet Responsiveness */
+    @media (max-width: 991.98px) {
+      .pdf-page-container {
+        padding: 0 10px;
+        margin: 15px auto;
+      }
+      .pdf-page-sheet {
+        min-height: auto !important;
+        margin-bottom: 25px;
+        border-radius: 8px;
+      }
+      .pdf-page-header-strip {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      .pdf-page-body {
+        padding: 25px 20px 65px 20px;
+      }
+      .pdf-page-footer-strip {
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 4px;
+        height: auto;
+        position: relative;
+        text-align: center;
+      }
+      .pdf-cover-vertical-title {
+        display: none;
+      }
+    }
+
+    /* Strict A4 Print & PDF Export Optimization */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      html, body {
+        background: #ffffff !important;
+        padding-top: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .pdf-viewer-bar {
+        display: none !important;
+      }
+      .pdf-page-container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .pdf-page-sheet {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        margin: 0 auto !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        position: relative !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+      }
+      .pdf-page-footer-strip {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+      }
+    }
+</style>
+</head>
+<body>
+
+  <header class="pdf-viewer-bar">
+    <div class="d-flex align-items-center">
+      <a href="downloads.html" class="btn btn-outline-light btn-sm me-3">
+        <i class="bi bi-arrow-left me-1"></i> Back to Downloads
+      </a>
+      <img src="skaLogo.webp" alt="SKA Logo" style="height: 30px;" class="me-2">
+      <span class="pdf-viewer-title d-none d-md-inline">Pad Mounted Transformer Catalogue</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <span class="badge bg-primary me-3 d-none d-lg-inline">Pad Mounted Series</span>
+      <button onclick="window.print()" class="btn btn-accent btn-sm me-2">
+        <i class="bi bi-printer me-1"></i> Print / Save PDF
+      </button>
+      <a href="contact.html#quote-form" class="btn btn-success btn-sm">
+        <i class="bi bi-chat-dots me-1"></i> Request Quote
+      </a>
+    </div>
+  </header>
+
+  <div class="pdf-page-container">
+
+    <!-- PAGE 1: COVER PAGE -->
+    <div class="pdf-page-sheet pdf-cover-sheet">
+      <div class="pdf-cover-vertical-title">Transformers</div>
+      
+      <div class="d-flex justify-content-between align-items-center p-5">
+        <div>
+          <span class="badge bg-info text-dark uppercase tracking-widest px-3 py-2 fw-bold">SKAT-PAD-2026</span>
+        </div>
+        <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 45px;" class="me-2">
+          <span class="fw-bold text-dark fs-5">SKA TRANSFORMERS</span>
+        </div>
+      </div>
+
+      <div class="p-5 ms-lg-5 ps-lg-5 my-auto">
+        <div class="bg-dark bg-opacity-50 p-4 p-md-5 rounded-4 backdrop-blur border border-light border-opacity-25 shadow-lg">
+          <h5 class="text-accent text-uppercase fw-bold tracking-wider mb-2">Compact Distribution Guide</h5>
+          <h1 class="display-3 fw-bold text-white mb-3">Pad Mounted Transformer Catalogue</h1>
+          <p class="fs-5 text-light mb-4">Complete technical guide for our compact, tamper-proof pad-mounted liquid-filled transformers up to 5000 kVA, 34.5 kV Class designed for underground distribution & solar farms.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <span class="badge bg-light text-dark fs-6 px-3 py-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Up to 5000 kVA, 34.5 kV Class</span>
+            <span class="badge bg-light text-dark fs-6 px-3 py-2"><i class="bi bi-shield-check text-success me-1"></i> CSA C227.4, IEEE C57.12.26, UL Listed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-5 d-flex justify-content-between align-items-end border-top border-light border-opacity-10">
+        <div>
+          <h6 class="fw-bold text-white mb-1">SKA Transformers Pvt. Ltd.</h6>
+          <p class="text-white-50 small mb-0">Flat No.G-603 Mohite Paradise, Sinhagad Road Anand Nagar, Pune 411051, INDIA</p>
+        </div>
+        <div class="text-end">
+          <span class="fst-italic text-accent fs-5">Powered by Engineering & Trust™</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- PAGE 2: INTRODUCTION & OVERVIEW -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 02 // PAD MOUNTED OVERVIEW</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-7">
+            <h2 class="pdf-section-title">Underground Power Distribution Solutions</h2>
+            <p class="lead text-dark fw-semibold">SKA Pad-Mounted Transformers are ground-installed, liquid-filled distribution transformers securely housed inside a locked, tamper-resistant steel cabinet mounted on an outdoor concrete pad.</p>
+            <p class="text-secondary">Designed exclusively for underground electrical distribution circuits, pad-mounted transformers eliminate unsightly overhead utility poles and wire clutter. Because all high and low voltage connections are completely enclosed in a grounded, tamper-proof compartment, pad-mounted transformers can be safely installed in public spaces without protective fencing.</p>
+            <p class="text-secondary">Available in single-phase (up to 167 kVA) and three-phase (up to 5000 kVA) designs up to 34.5 kV primary class, SKA pad-mounted units comply strictly with CSA C227.4, IEEE C57.12.26, IEEE C57.12.28 (Tamper Resistance), and DOE efficiency standards.</p>
+          </div>
+          <div class="col-lg-5 text-center">
+            <img src="img14.jpeg" alt="Pad Mounted Transformer" class="img-fluid rounded-4 shadow-sm border p-2 bg-white">
+          </div>
+        </div>
+
+        <div class="pdf-blue-card">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="fw-bold text-white mb-2">Dead-Front & Live-Front Configurations</h5>
+              <p class="text-light mb-0 small">Dead-front designs feature insulated, touch-safe separable elbow connectors for maximum operator safety. Live-front options offer porcelain bushings for specific utility preferences.</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+              <span class="badge bg-warning text-dark fs-6 px-3 py-2">Tamper-Proof Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 2</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 3: FEATURES & APPLICATIONS -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 03 // FEATURES & APPLICATIONS</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <h4 class="fw-bold text-primary mb-3"><i class="bi bi-star-fill me-2"></i>Key Product Features</h4>
+            <ul class="list-unstyled text-secondary small lh-lg">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Tamper-Resistant Cabinet:</strong> Meets IEEE C57.12.28 multi-point locking standards.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Dead-Front Safety:</strong> High-voltage separable elbow bushings for touch-safe operation.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Radial & Loop Feed Options:</strong> Flexible primary circuit switching configurations.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>FR3 Bio-Ester Fluid Option:</strong> High fire-point (360°C) environmentally safe oil.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Bay-O-Net Fusing:</strong> Primary overload & fault protection with current-limiting backup.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Step-Lap CRGO Core:</strong> Ultra-low core losses and quiet hum level.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Multi-Layer Powder Finish:</strong> Salt-spray resistant polyurethane coating (ANSI 70 / Green).</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Automatic PRD Valve:</strong> Built-in pressure relief device with visual indicator.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>5-Position Tap Changer:</strong> Off-circuit tap switch for output voltage tuning.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Ground-Level Maintenance:</strong> Easy front cabinet door access for service technicians.</li>
+            </ul>
+          </div>
+
+          <div class="col-md-6">
+            <h4 class="fw-bold text-primary mb-3"><i class="bi bi-grid-fill me-2"></i>Major Applications</h4>
+            <div class="row g-2">
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-house me-2 text-primary"></i>Residential Subdivisions</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-building me-2 text-primary"></i>Commercial Parks</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-shop me-2 text-primary"></i>Shopping Centers</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-brightness-high me-2 text-primary"></i>Solar Renewable Farms</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-wind me-2 text-primary"></i>Wind Power Collector Grids</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-hospital me-2 text-primary"></i>Medical Facilities</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-book me-2 text-primary"></i>Schools & Universities</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-ev-station me-2 text-primary"></i>EV Charging Hubs</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-hdd-rack me-2 text-primary"></i>Data Centers</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-airplane me-2 text-primary"></i>Airports & Logistics</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 3</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 4: TECHNICAL SPECIFICATIONS -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 04 // TECHNICAL SPECIFICATIONS</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Technical Specification Data Sheet</h2>
+        <p class="text-secondary small mb-4">Engineering parameters for SKA Liquid-Filled Pad-Mounted Distribution Transformers.</p>
+
+        <div class="table-responsive rounded border shadow-sm">
+          <table class="table table-striped table-hover align-middle mb-0 small">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col" class="py-2 px-3 w-50">Technical Parameter</th>
+                <th scope="col" class="py-2 px-3 w-50">Standard Engineering Specification</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="fw-bold text-dark px-3 py-2">Power Rating Range (3-Phase)</td><td class="text-primary fw-semibold px-3 py-2">75 kVA to 5000 kVA (5 MVA)</td></tr>
+              <tr><td class="fw-bold text-dark px-3 py-2">Power Rating Range (1-Phase)</td><td class="px-3 py-2">10 kVA to 167 kVA</td></tr>
+              <tr><td class="fw-bold text-dark px-3 py-2">Primary Voltage Class</td><td class="px-3 py-2">Up to 34.5 kV (BIL up to 150 kV)</td></tr>
+              <tr><td class="fw-bold text-dark px-3 py-2">Secondary Voltage Class</td><td class="px-3 py-2">120/240V, 208Y/120V, 480Y/277V, 600V</td></tr>
+              <tr><td class="fw-bold text-dark px-3 py-2">Operating Frequency</td><td class="px-3 py-2">50 Hz / 60 Hz</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Cooling Methodology</td><td class="px-3 py-2">ONAN (Natural Convective Oil Cooling)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Insulation Fluid Options</td><td class="px-3 py-2">Mineral Oil / FR3 Bio-Degradable Natural Ester</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Temperature Rise Limit</td><td class="px-3 py-2">65°C Winding / 55°C Top Oil Rise</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Front Panel Interface</td><td class="px-3 py-2">Dead Front (Separable Elbows) or Live Front</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Circuit Feed Configuration</td><td class="px-3 py-2">Loop Feed or Radial Feed</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Primary Fusing System</td><td class="px-3 py-2">Bay-O-Net Fuses with ELSP Current Limiting Backup</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Vector Group Configuration</td><td class="px-3 py-2">Dyn1, Dyn11, Dyn5 or custom per spec</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Impedance (%Z)</td><td class="px-3 py-2">Per CSA C227.4 & IEEE C57.12.26 limits</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Cabinet Security Standard</td><td class="px-3 py-2">IEEE C57.12.28 (Penta-Head Lock & Recessed Latch)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Ambient Temperature Range</td><td class="px-3 py-2">-40°C to +40°C</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Applicable Design Standards</td><td class="px-3 py-2">CSA C227.4, CSA C802.1, IEEE C57.12.26, UL Listed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 4</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 5: CONSTRUCTION DETAILS -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 05 // CONSTRUCTION DETAILS</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Cabinet Construction & Components</h2>
+        
+        <div class="row align-items-center mb-4">
+          <div class="col-lg-6">
+            <h5 class="fw-bold text-primary mb-2">1. Heavy-Gauge Steel Enclosure</h5>
+            <p class="text-secondary small">Fabricated from heavy mild steel with a recessed sill, captive penta-head locking bolt, and padlocking hasp meeting IEEE C57.12.28 tamper resistance requirements.</p>
+
+            <h5 class="fw-bold text-primary mb-2">2. Dead-Front HV Bushing Wells</h5>
+            <p class="text-secondary small">High-voltage epoxy bushing wells accept 200A loadbreak or non-loadbreak separable elbow connectors, ensuring completely touch-safe operator protection.</p>
+
+            <h5 class="fw-bold text-primary mb-2">3. Internal Core-Coil Assembly</h5>
+            <p class="text-secondary small">Step-lap CRGO steel core with copper/aluminum windings, dried under vacuum and submerged in high-grade mineral or FR3 natural ester dielectric fluid.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="row g-2">
+              <div class="col-6"><img src="img14.jpeg" alt="Pad Mounted" class="img-fluid rounded border shadow-sm"></div>
+              <div class="col-6"><img src="img8.jpeg" alt="Cabinet Compartment" class="img-fluid rounded border shadow-sm"></div>
+              <div class="col-12 mt-2"><img src="img9.jpeg" alt="Pad Bushings" class="img-fluid rounded border shadow-sm"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pdf-quote-banner">
+          "Quality at SKA Transformers is a way of life"
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 5</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 6: TESTING & QA -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 06 // TESTING & QA</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Testing & Quality Compliance</h2>
+        <p class="text-secondary small mb-4">Every pad-mounted transformer undergoes 100% factory routine testing per CSA C227.4 & IEEE C57.12.90.</p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <div class="p-4 bg-light border rounded h-100">
+              <h5 class="fw-bold text-dark mb-3"><i class="bi bi-clipboard-check text-primary me-2"></i>Routine Factory Tests</h5>
+              <ul class="text-secondary small lh-lg mb-0">
+                <li>Winding Resistance & Turns Ratio Test</li>
+                <li>Polarity & Phase Relation Verification</li>
+                <li>No-Load Loss & Excitation Current</li>
+                <li>Load Loss & Impedance Voltage Test</li>
+                <li>Applied AC High-Voltage Withstand Test</li>
+                <li>Induced Overvoltage Dielectric Test</li>
+                <li>Tank Pressure & Vacuum Leakage Test</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-4 bg-light border rounded h-100">
+              <h5 class="fw-bold text-dark mb-3"><i class="bi bi-award text-primary me-2"></i>Type & Enclosure Tests</h5>
+              <ul class="text-secondary small lh-lg mb-0">
+                <li>Full Load Temperature Rise Test</li>
+                <li>Lightning Impulse Voltage Test</li>
+                <li>IEEE C57.12.28 Cabinet Security Test</li>
+                <li>Salt Spray Paint Coating Corrosion Test</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 6</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 7: ACCESSORIES -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 07 // ACCESSORIES</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Standard Accessories & Fusing</h2>
+
+        <div class="row g-3 my-4">
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-primary mb-1"><i class="bi bi-shield-exclamation me-2"></i>Bay-O-Net Fuse Assembly</h6><p class="small text-muted mb-0">Oil-immersed primary fuse with field-replaceable element and drip cup.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-primary mb-1"><i class="bi bi-arrow-up-circle me-2"></i>Automatic Pressure Relief Valve</h6><p class="small text-muted mb-0">Relieves internal pressure buildup with manual pull ring.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-primary mb-1"><i class="bi bi-droplet me-2"></i>Drain Valve & Sampler</h6><p class="small text-muted mb-0">Bottom 1" brass drain valve with oil sampling port.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-primary mb-1"><i class="bi bi-moisture me-2"></i>Liquid Level Gauge</h6><p class="small text-muted mb-0">Dial-type magnetic liquid level indicator in cabinet.</p></div></div>
+        </div>
+
+        <div class="pdf-quote-banner">
+          "We are committed to exceeding customer expectations"
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 7</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 8: PRODUCT ADVANTAGES -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 08 // PRODUCT ADVANTAGES</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Key Product Advantages</h2>
+
+        <div class="row g-3 my-4">
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">1. Superior Public Safety</h6><p class="small text-muted mb-0">Tamper-proof enclosure eliminates public hazard without costly fences.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">2. Zero Visual Pollution</h6><p class="small text-muted mb-0">Underground cable connection maintains clean community architecture.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">3. Weather Outage Immunity</h6><p class="small text-muted mb-0">Underground lines avoid ice, lightning, and fallen tree branch outages.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">4. Ground-Level Ergonomics</h6><p class="small text-muted mb-0">Convenient front door access simplifies routine maintenance and switching.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">5. FR3 Eco-Fluid Option</h6><p class="small text-muted mb-0">Bio-degradable natural ester oil with 360°C fire point for maximum safety.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">6. Long Operational Life</h6><p class="small text-muted mb-0">Heavy steel construction ensures 30+ years of maintenance-free service.</p></div></div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 8</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 9: WHY CHOOSE SKA -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 09 // WHY CHOOSE SKA</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Why Choose SKA Transformers?</h2>
+        <div class="row align-items-center my-4">
+          <div class="col-lg-7">
+            <p class="text-secondary small">SKA Transformers Pvt. Ltd. is a trusted manufacturer of pad-mounted distribution transformers built to North American CSA and IEEE standards for power utilities and renewable energy projects worldwide.</p>
+            <ul class="list-unstyled text-secondary small lh-lg">
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>35+ Years Distribution Leadership:</strong> Proven in residential & solar grids.</li>
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Modern Fabrication & Paint Line:</strong> Sa 2.5 shot blasting & powder coat line.</li>
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Rigorous Routine Test Floor:</strong> 100% routine electrical and pressure testing.</li>
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>CSA, CAN & IEEE Certified:</strong> Fully compliant utility designs.</li>
+            </ul>
+          </div>
+          <div class="col-lg-5">
+            <img src="img14.jpeg" alt="Pad Mounted" class="img-fluid rounded border shadow-sm">
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 9</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 10: PACKING & DISPATCH -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 10 // PACKING & DISPATCH</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Packaging & Dispatch Standards</h2>
+        <p class="text-secondary small">Pad-mounted units are securely bolted to heavy pallet bases with protective corner guards and sea-worthy wrapping to ensure safe delivery to site pads.</p>
+        <div class="row align-items-center my-4">
+          <div class="col-md-6">
+            <img src="img2.jpg" alt="Dispatch Area" class="img-fluid rounded border shadow-sm">
+          </div>
+          <div class="col-md-6">
+            <h5 class="fw-bold text-primary">Single-Window After-Sales</h5>
+            <p class="text-secondary small">Our technical support team provides site placement guidance, elbow termination advice, testing assistance, and full warranty service.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 10</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 11: CONTACT & GLOBAL OFFICES -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 11 // CONTACT & OFFICES</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Global Contact & Plant Locations</h2>
+        
+        <div class="row g-4 my-4">
+          <div class="col-md-6">
+            <div class="p-4 border rounded-3 bg-light h-100">
+              <h5 class="fw-bold text-primary mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Registered Office & Works</h5>
+              <p class="text-dark fw-bold mb-1">SKA Transformers Pvt. Ltd.</p>
+              <p class="text-secondary small mb-3">Flat No.G-603 Mohite Paradise, Sinhagad Road Anand Nagar, Pune - 411051, Maharashtra, India.</p>
+              <p class="text-secondary small mb-1"><i class="bi bi-telephone-fill me-2 text-primary"></i>+91 87665 83894 / +91 20 2712 1234</p>
+              <p class="text-secondary small mb-1"><i class="bi bi-envelope-fill me-2 text-primary"></i>sales@skatransformers.com</p>
+              <p class="text-secondary small mb-0"><i class="bi bi-globe me-2 text-primary"></i>www.skatransformers.com</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-4 border rounded-3 bg-light h-100">
+              <h5 class="fw-bold text-primary mb-3"><i class="bi bi-headset me-2"></i>Department Contacts</h5>
+              <p class="text-secondary small mb-2"><strong>Sales & Quotations:</strong> sales@skatransformers.com</p>
+              <p class="text-secondary small mb-2"><strong>Customer Support:</strong> +91 87665 83894</p>
+              <p class="text-secondary small mb-2"><strong>Exports Division:</strong> sales@skatransformers.com</p>
+              <p class="text-secondary small mb-0"><strong>Engineering Desk:</strong> sales@skatransformers.com</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <a href="contact.html#quote-form" class="btn btn-primary btn-lg rounded-pill px-5 shadow me-3 mb-2">
+            <i class="bi bi-envelope-paper me-2"></i> Request Official Quote
+          </a>
+          <a href="downloads.html" class="btn btn-outline-secondary btn-lg rounded-pill px-4 mb-2">
+            <i class="bi bi-collection me-2"></i> View Other Catalogues
+          </a>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 11</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Transformer Catalogue - SKA Transformers</title>
+  <meta name="description" content="High-voltage power transformers up to 150 MVA, 220 kV Class engineered for transmission grids, generation plants, and industrial substations.">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --pdf-navy: #0b2545;
+      --pdf-blue: #134074;
+      --pdf-accent: #0077b6;
+      --pdf-gold: #f4a261;
+      --pdf-bg: #f8fafc;
+    }
+
+    body {
+      background-color: #475569;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      padding-top: 75px;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .pdf-viewer-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: #0f172a;
+      color: #ffffff;
+      z-index: 1050;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .pdf-viewer-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 450px;
+    }
+
+    .pdf-page-container {
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .pdf-page-sheet {
+      background: #ffffff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      border-radius: 4px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+      min-height: 1080px;
+      box-sizing: border-box;
+    }
+
+    .pdf-page-header-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 35px 15px 35px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .pdf-page-footer-strip {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 45px;
+      background: var(--pdf-navy);
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 35px;
+      font-size: 0.82rem;
+    }
+
+    .pdf-page-body {
+      padding: 35px;
+      padding-bottom: 65px;
+    }
+
+    .pdf-cover-sheet {
+      background: linear-gradient(135deg, #0b2545 0%, #134074 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 1080px;
+      position: relative;
+    }
+
+    .pdf-cover-vertical-title {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 4.5rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.15);
+      text-transform: uppercase;
+      position: absolute;
+      left: 25px;
+      bottom: 50px;
+      user-select: none;
+    }
+
+    .pdf-quote-banner {
+      background: #1e3a8a;
+      color: #ffffff;
+      padding: 20px 30px;
+      font-size: 1.35rem;
+      font-weight: 300;
+      font-style: italic;
+      border-left: 6px solid #38bdf8;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .pdf-section-title {
+      color: var(--pdf-navy);
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .pdf-section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--pdf-accent);
+      margin-top: 6px;
+    }
+
+    .pdf-blue-card {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+    }
+
+    /* Mobile & Tablet Responsiveness */
+    @media (max-width: 991.98px) {
+      .pdf-page-container {
+        padding: 0 10px;
+        margin: 15px auto;
+      }
+      .pdf-page-sheet {
+        min-height: auto !important;
+        margin-bottom: 25px;
+        border-radius: 8px;
+      }
+      .pdf-page-header-strip {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      .pdf-page-body {
+        padding: 25px 20px 65px 20px;
+      }
+      .pdf-page-footer-strip {
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 4px;
+        height: auto;
+        position: relative;
+        text-align: center;
+      }
+      .pdf-cover-vertical-title {
+        display: none;
+      }
+    }
+
+    /* Strict A4 Print & PDF Export Optimization */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      html, body {
+        background: #ffffff !important;
+        padding-top: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .pdf-viewer-bar {
+        display: none !important;
+      }
+      .pdf-page-container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .pdf-page-sheet {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        margin: 0 auto !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        position: relative !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+      }
+      .pdf-page-footer-strip {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+      }
+    }
+</style>
+</head>
+<body>
+
+  <header class="pdf-viewer-bar">
+    <div class="d-flex align-items-center">
+      <a href="downloads.html" class="btn btn-outline-light btn-sm me-3">
+        <i class="bi bi-arrow-left me-1"></i> Back to Downloads
+      </a>
+      <img src="skaLogo.webp" alt="SKA Logo" style="height: 30px;" class="me-2">
+      <span class="pdf-viewer-title d-none d-md-inline">Power Transformer Catalogue</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <span class="badge bg-primary me-3 d-none d-lg-inline">Power Transformers</span>
+      <button onclick="window.print()" class="btn btn-accent btn-sm me-2">
+        <i class="bi bi-printer me-1"></i> Print / Save PDF
+      </button>
+      <a href="contact.html#quote-form" class="btn btn-success btn-sm">
+        <i class="bi bi-chat-dots me-1"></i> Request Quote
+      </a>
+    </div>
+  </header>
+
+  <div class="pdf-page-container">
+
+    <!-- PAGE 1: COVER PAGE -->
+    <div class="pdf-page-sheet pdf-cover-sheet">
+      <div class="pdf-cover-vertical-title">Transformers</div>
+      
+      <div class="d-flex justify-content-between align-items-center p-5">
+        <div>
+          <span class="badge bg-info text-dark uppercase tracking-widest px-3 py-2 fw-bold">SKAT-PWR-2026</span>
+        </div>
+        <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 45px;" class="me-2">
+          <span class="fw-bold text-dark fs-5">SKA TRANSFORMERS</span>
+        </div>
+      </div>
+
+      <div class="p-5 ms-lg-5 ps-lg-5 my-auto">
+        <div class="bg-dark bg-opacity-50 p-4 p-md-5 rounded-4 backdrop-blur border border-light border-opacity-25 shadow-lg">
+          <h5 class="text-accent text-uppercase fw-bold tracking-wider mb-2">Engineering Technical Catalogue</h5>
+          <h1 class="display-3 fw-bold text-white mb-3">Power Transformer Catalogue</h1>
+          <p class="fs-5 text-light mb-4">Detailed engineering data for high-voltage power transformers up to 150 MVA, 220 kV Class, including core assembly and cooling systems.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <span class="badge bg-light text-dark fs-6 px-3 py-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> 10 MVA to 150 MVA, Up to 220 kV</span>
+            <span class="badge bg-light text-dark fs-6 px-3 py-2"><i class="bi bi-shield-check text-success me-1"></i> IEEE C57.12.00, CSA C88 Compliant</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-5 d-flex justify-content-between align-items-end border-top border-light border-opacity-10">
+        <div>
+          <h6 class="fw-bold text-white mb-1">SKA Transformers Pvt. Ltd.</h6>
+          <p class="text-white-50 small mb-0">Flat No.G-603 Mohite Paradise, Sinhagad Road Anand Nagar, Pune 411051, INDIA</p>
+        </div>
+        <div class="text-end">
+          <span class="fst-italic text-accent fs-5">Powered by Engineering & Trust™</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- PAGE 2: INTRODUCTION & OVERVIEW -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 02 // POWER SOLUTIONS</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-7">
+            <h2 class="pdf-section-title">High Voltage Power Solutions</h2>
+            <p class="lead text-dark fw-semibold">SKA Power Transformers are custom-engineered for heavy-duty transmission networks, power generation facilities, and major industrial substations.</p>
+            <p class="text-secondary">Designed to handle bulk electrical energy transfer with minimal load losses, these oil-immersed units feature ratings ranging from 10 MVA up to 150 MVA with primary voltage ratings up to 220 kV class. Each transformer is designed using 3D Electromagnetic Finite Element Method (FEM) simulation software to withstand severe dynamic short-circuit stress, thermal overloads, and seismic acceleration forces.</p>
+            <p class="text-secondary">Insulation media options include premium mineral oil or high fire-point natural ester fluids (FR3), paired with automated cooling arrangements (ONAN / ONAF / OFAF / ODAF) for uncompromised grid availability.</p>
+          </div>
+          <div class="col-lg-5 text-center">
+            <img src="powertransformer.jpg" alt="SKA Power Transformer" class="img-fluid rounded-4 shadow-sm border p-2 bg-white">
+          </div>
+        </div>
+
+        <div class="pdf-blue-card">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="fw-bold text-white mb-2">35+ Years of High Voltage Engineering</h5>
+              <p class="text-light mb-0 small">Proven performance across major state utility grids, transmission substations, steel mills, and renewable solar/wind plants worldwide.</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+              <span class="badge bg-warning text-dark fs-6 px-3 py-2">ISO 9001 Certified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 2</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 3: FEATURES & APPLICATIONS -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 03 // FEATURES & APPLICATIONS</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <h4 class="fw-bold text-primary mb-3"><i class="bi bi-star-fill me-2"></i>Key Product Features</h4>
+            <ul class="list-unstyled text-secondary small lh-lg">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>High Bulk Transfer Capacity:</strong> Ratings up to 150 MVA continuous.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Step-Lap CRGO Core:</strong> Prime Hi-B silicon steel for low no-load losses.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Continuously Transposed Conductors (CTC):</strong> Reduces winding eddy losses.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Vapour Phase Drying (VPD):</strong> Dielectric moisture levels below 0.5%.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>120-Ton Hydraulic Coil Sizing:</strong> Superior short-circuit withstand.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>On-Load Tap Changer (OLTC):</strong> Seamless automatic voltage regulation.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Leak-Proof Steel Tank:</strong> Vacuum & positive pressure certified per CBIP.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Flexible Cooling (ONAN/ONAF/OFAF):</strong> Automated fan & pump controls.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Comprehensive Monitoring:</strong> Buchholz relay, PRD, WTI, OTI, & MOG.</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>IEEE & CSA Compliance:</strong> Full compliance with CSA C88 & IEEE C57.12.00.</li>
+            </ul>
+          </div>
+
+          <div class="col-md-6">
+            <h4 class="fw-bold text-primary mb-3"><i class="bi bi-grid-fill me-2"></i>Major Applications</h4>
+            <div class="row g-2">
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-lightning-charge me-2 text-primary"></i>Power Generation Plants</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-diagram-3 me-2 text-primary"></i>HV Transmission Grids</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-hammer me-2 text-primary"></i>Steel & Metal Mills</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-bricks me-2 text-primary"></i>Cement Plants</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-brightness-high me-2 text-primary"></i>Solar Mega Parks</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-wind me-2 text-primary"></i>Wind Energy Substations</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-fuel-pump me-2 text-primary"></i>Petrochemical & Refineries</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-minecart me-2 text-primary"></i>Mining & Minerals</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-plug me-2 text-primary"></i>Utility Distribution</div></div>
+              <div class="col-6"><div class="p-3 bg-light rounded border small fw-semibold text-dark"><i class="bi bi-building-gear me-2 text-primary"></i>Heavy Industrial Works</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 3</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 4: TECHNICAL SPECIFICATIONS -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 04 // TECHNICAL SPECIFICATIONS</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Technical Specification Data Sheet</h2>
+        <p class="text-secondary small mb-4">Engineering parameters for SKA Oil-Immersed High-Voltage Power Transformers.</p>
+
+        <div class="table-responsive rounded border shadow-sm">
+          <table class="table table-striped table-hover align-middle mb-0 small">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col" class="py-2 px-3 w-50">Technical Parameter</th>
+                <th scope="col" class="py-2 px-3 w-50">Standard Engineering Specification</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="fw-bold text-dark px-3 py-2">Power Rating Range</td><td class="text-primary fw-semibold px-3 py-2">10 MVA to 150 MVA (150,000 kVA)</td></tr>
+              <tr><td class="fw-bold text-dark px-3 py-2">High Voltage (HV) Primary Class</td><td class="px-3 py-2">Up to 132 kV / 220 kV Class (BIL up to 650 kV)</td></tr>
+              <tr><td class="fw-bold text-dark px-3 py-2">Low Voltage (LV) Secondary Class</td><td class="px-3 py-2">4.16 kV to 34.5 kV</td></tr>
+              <tr><td class="fw-bold text-dark px-3 py-2">Operating Frequency</td><td class="px-3 py-2">50 Hz / 60 Hz</td></tr>
+              <tr><td class="fw-bold text-dark px-3 py-2">Number of Phases</td><td class="px-3 py-2">Three Phase (Single Phase units custom)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Cooling Methodology</td><td class="px-3 py-2">ONAN / ONAF / OFAF / ODAF</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Insulation Medium Options</td><td class="px-3 py-2">High-Grade Mineral Oil / Natural Ester Fluid (FR3)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Temperature Rise Limit</td><td class="px-3 py-2">65°C Winding Rise / 55°C Top Oil Rise</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Vector Group Configuration</td><td class="px-3 py-2">Dyn1, Dyn11, Ynd1, Ynd11 or custom per spec</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Impedance (%Z)</td><td class="px-3 py-2">5.75% to 7.5% per IEEE C57.12.00 standards</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Core Steel Construction</td><td class="px-3 py-2">Prime CRGO Silicon Steel (Hi-B Step-Lap Mitered)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Winding Conductor Material</td><td class="px-3 py-2">Electrolytic Copper CTC (Continuously Transposed)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Tank Fabrication Type</td><td class="px-3 py-2">Bell-Type or Conventional Welded Mild Steel Tank</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Tap Changer Equipment</td><td class="px-3 py-2">On-Load Tap Changer (OLTC) / Off-Circuit (OCTC)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Bushings Type</td><td class="px-3 py-2">Porcelain or Oil-Impregnated Paper (OIP) / RIP Bushings</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Ambient Temperature Range</td><td class="px-3 py-2">-25°C to +40°C (30°C 24-hr Average)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Altitude Capability</td><td class="px-3 py-2">Up to 1000m standard (De-rated for higher altitudes)</td></tr>
+              <tr><td class="px-3 py-2 fw-bold text-dark">Applicable Design Standards</td><td class="px-3 py-2">IEEE C57.12.00, IEEE C57.12.90, CSA C88, CAN/CSA, ISO</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 4</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 5: CONSTRUCTION DETAILS -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 05 // CONSTRUCTION DETAILS</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Construction Details & Active Part Assembly</h2>
+        
+        <div class="row align-items-center mb-4">
+          <div class="col-lg-6">
+            <h5 class="fw-bold text-primary mb-2">1. Core & Clamping Assembly</h5>
+            <p class="text-secondary small">Fabricated from prime grade, Hi-B CRGO silicon steel laminations with step-lap mitered joints. Limbs are clamped under controlled hydraulic pressure using resin-bonded glass bands to ensure minimal excitation current and low sound levels.</p>
+
+            <h5 class="fw-bold text-primary mb-2">2. CTC Windings & Hydraulic Sizing</h5>
+            <p class="text-secondary small">Windings utilize Continuously Transposed Conductors (CTC) of electrolytic copper. Disc and helical coil structures feature radial pressboard spacers. Coils are thermally processed and clamped under a 120-ton hydraulic press to guarantee short-circuit strength.</p>
+
+            <h5 class="fw-bold text-primary mb-2">3. Vapour Phase Drying (VPD) & Tanking</h5>
+            <p class="text-secondary small">The active part is dried inside a MICAFIL Vapour Phase Drying plant to reduce insulation moisture below 0.5%. The core-coil assembly is locked into the heavy steel tank and oil-impregnated under deep vacuum.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="row g-2">
+              <div class="col-6"><img src="powertransformer.jpg" alt="Core Assembly" class="img-fluid rounded border shadow-sm"></div>
+              <div class="col-6"><img src="img11.jpeg" alt="Active Part Tanking" class="img-fluid rounded border shadow-sm"></div>
+              <div class="col-12 mt-2"><img src="img10.jpeg" alt="Tank Construction" class="img-fluid rounded border shadow-sm"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pdf-quote-banner">
+          "Exporting across the globe"
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 5</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 6: TESTING & QA -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 06 // TESTING & QA</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">High Voltage Factory Testing</h2>
+        <p class="text-secondary small mb-4">Every power transformer is subjected to complete routine, type, and special tests per IEEE C57.12.90 & CSA C88 standards in our high-voltage test laboratory.</p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <div class="p-4 bg-light border rounded h-100">
+              <h5 class="fw-bold text-dark mb-3"><i class="bi bi-clipboard-check text-primary me-2"></i>Routine Tests</h5>
+              <ul class="text-secondary small lh-lg mb-0">
+                <li>Winding Resistance on all tap positions</li>
+                <li>Voltage Ratio, Polarity & Phase Relation</li>
+                <li>No-Load Loss & Excitation Current</li>
+                <li>Load Loss & Impedance Voltage</li>
+                <li>Separate-Source Withstand AC Voltage</li>
+                <li>Induced Overvoltage Withstand Test</li>
+                <li>Insulation Resistance & Dissipation Factor (Tan Delta)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-4 bg-light border rounded h-100">
+              <h5 class="fw-bold text-dark mb-3"><i class="bi bi-award text-primary me-2"></i>Type & Special Tests</h5>
+              <ul class="text-secondary small lh-lg mb-0">
+                <li>Temperature Rise Test at full rating</li>
+                <li>Lightning Impulse Voltage Test (Full & Chopped Wave)</li>
+                <li>Switching Impulse Test</li>
+                <li>Partial Discharge Measurement (<50 pC)</li>
+                <li>Sweep Frequency Response Analysis (SFRA)</li>
+                <li>Sound Level Test per NEMA TR-1</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 6</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 7: ACCESSORIES -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 07 // PROTECTION & ACCESSORIES</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Standard Accessories & Protection Systems</h2>
+
+        <div class="row g-3 my-4">
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-primary mb-1"><i class="bi bi-shield-exclamation me-2"></i>Buchholz Relay</h6><p class="small text-muted mb-0">Double-float gas accumulation and oil surge relay with alarm/trip contacts.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-primary mb-1"><i class="bi bi-arrow-up-circle me-2"></i>Pressure Relief Device (PRD)</h6><p class="small text-muted mb-0">Spring-loaded safety relief valve with visual pin indicator and trip switch.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-primary mb-1"><i class="bi bi-thermometer-high me-2"></i>Oil & Winding Temperature Indicators</h6><p class="small text-muted mb-0">Dial gauges (OTI/WTI) with maximum pointer and adjustable microswitches.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-primary mb-1"><i class="bi bi-box me-2"></i>Marshalling Box</h6><p class="small text-muted mb-0">NEMA 3R/4X stainless steel control panel for wiring of all protective devices.</p></div></div>
+        </div>
+
+        <div class="pdf-quote-banner">
+          "Quality at SKA Transformers is a way of life"
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 7</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 8: PRODUCT ADVANTAGES -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 08 // PRODUCT ADVANTAGES</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Key Product Advantages</h2>
+
+        <div class="row g-3 my-4">
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">1. Ultra-Low Load Losses</h6><p class="small text-muted mb-0">Optimized copper CTC conductor geometry minimizes overall energy losses.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">2. Short-Circuit Withstand</h6><p class="small text-muted mb-0">Short-circuit test proven design for extreme grid stability.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">3. Vapour Phase Dry Integrity</h6><p class="small text-muted mb-0">VPD processing ensures deep dielectric strength and long insulation life.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">4. Severe Outdoor Durability</h6><p class="small text-muted mb-0">Shot-blasted Sa 2.5 tank with epoxy/polyurethane paint for harsh climates.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">5. Automated Voltage Regulation</h6><p class="small text-muted mb-0">On-Load Tap Changer (OLTC) maintains stable secondary bus voltage.</p></div></div>
+          <div class="col-md-6"><div class="p-3 border rounded bg-light"><h6 class="fw-bold text-dark mb-1">6. Long Service Life</h6><p class="small text-muted mb-0">Engineered for 35+ years of continuous high-reliability transmission duty.</p></div></div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 8</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 9: WHY CHOOSE SKA -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 09 // WHY CHOOSE SKA</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Why Choose SKA Transformers?</h2>
+        <div class="row align-items-center my-4">
+          <div class="col-lg-7">
+            <p class="text-secondary small">SKA Transformers Pvt. Ltd. is a leading manufacturer of high-voltage power transformers, delivering engineering excellence across global utility and industrial markets for over 3.5 decades.</p>
+            <ul class="list-unstyled text-secondary small lh-lg">
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>35+ Years High-Voltage Leadership:</strong> Proven in power grids worldwide.</li>
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>MICAFIL VPD & Heavy Fabrication Plant:</strong> Precision manufacturing facilities.</li>
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Comprehensive High-Voltage Testing:</strong> 100% factory acceptance testing.</li>
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i><strong>IEEE, CSA & CAN Compliance:</strong> Built to stringent international standards.</li>
+            </ul>
+          </div>
+          <div class="col-lg-5">
+            <img src="powertransformer.jpg" alt="Power Transformer" class="img-fluid rounded border shadow-sm">
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 9</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 10: PACKING & DISPATCH -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 10 // PACKING & DISPATCH</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Packaging & Dispatch Standards</h2>
+        <p class="text-secondary small">Power transformers are dispatched filled with oil or nitrogen gas under pressure. Bushings, radiators, and conservators are packed in standardized wooden crates with sea-worthy protection.</p>
+        <div class="row align-items-center my-4">
+          <div class="col-md-6">
+            <img src="img2.jpg" alt="Dispatch Area" class="img-fluid rounded border shadow-sm">
+          </div>
+          <div class="col-md-6">
+            <h5 class="fw-bold text-primary">Single-Window After-Sales</h5>
+            <p class="text-secondary small">Our dedicated field engineering team provides single-window service for site assembly, oil filling under vacuum, testing, commissioning, and warranty support.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 10</span>
+      </div>
+    </div>
+
+
+    <!-- PAGE 11: CONTACT & GLOBAL OFFICES -->
+    <div class="pdf-page-sheet">
+      <div class="pdf-page-header-strip">
+        <div class="d-flex align-items-center">
+          <img src="skaLogo.webp" alt="SKA Logo" style="height: 25px;" class="me-2">
+          <span class="fw-bold text-primary small">SKA TRANSFORMERS CATALOGUE</span>
+        </div>
+        <span class="text-muted small">PAGE 11 // CONTACT & OFFICES</span>
+      </div>
+
+      <div class="pdf-page-body">
+        <h2 class="pdf-section-title">Global Contact & Plant Locations</h2>
+        
+        <div class="row g-4 my-4">
+          <div class="col-md-6">
+            <div class="p-4 border rounded-3 bg-light h-100">
+              <h5 class="fw-bold text-primary mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Registered Office & Works</h5>
+              <p class="text-dark fw-bold mb-1">SKA Transformers Pvt. Ltd.</p>
+              <p class="text-secondary small mb-3">Flat No.G-603 Mohite Paradise, Sinhagad Road Anand Nagar, Pune - 411051, Maharashtra, India.</p>
+              <p class="text-secondary small mb-1"><i class="bi bi-telephone-fill me-2 text-primary"></i>+91 87665 83894 / +91 20 2712 1234</p>
+              <p class="text-secondary small mb-1"><i class="bi bi-envelope-fill me-2 text-primary"></i>sales@skatransformers.com</p>
+              <p class="text-secondary small mb-0"><i class="bi bi-globe me-2 text-primary"></i>www.skatransformers.com</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-4 border rounded-3 bg-light h-100">
+              <h5 class="fw-bold text-primary mb-3"><i class="bi bi-headset me-2"></i>Department Contacts</h5>
+              <p class="text-secondary small mb-2"><strong>Sales & Quotations:</strong> sales@skatransformers.com</p>
+              <p class="text-secondary small mb-2"><strong>Customer Support:</strong> +91 87665 83894</p>
+              <p class="text-secondary small mb-2"><strong>Exports Division:</strong> sales@skatransformers.com</p>
+              <p class="text-secondary small mb-0"><strong>Engineering Desk:</strong> sales@skatransformers.com</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <a href="contact.html#quote-form" class="btn btn-primary btn-lg rounded-pill px-5 shadow me-3 mb-2">
+            <i class="bi bi-envelope-paper me-2"></i> Request Official Quote
+          </a>
+          <a href="downloads.html" class="btn btn-outline-secondary btn-lg rounded-pill px-4 mb-2">
+            <i class="bi bi-collection me-2"></i> View Other Catalogues
+          </a>
+        </div>
+      </div>
+
+      <div class="pdf-page-footer-strip">
+        <span>SKA TRANSFORMERS PVT. LTD.</span>
+        <span>WWW.SKATRANSFORMERS.COM</span>
+        <span>PAGE 11</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
